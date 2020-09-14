@@ -1,11 +1,5 @@
 version: '3.2'
 
-networks:
-  frontend:
-    driver: overlay 
-  backend: 
-  
-
 services:
 
   visualizer:
@@ -30,7 +24,6 @@ services:
     ports:
       - "9090:9090"
     deploy:
-
         #traefik.port: "9090"
         #traefik.frontend.rule: "Host:prometheus.myhost.com"
         # traefik.frontend.auth.basic.usersFile: /path/.htpasswd   
@@ -45,10 +38,9 @@ services:
 
 
   ################################################################
-  # The promethes node-exporter 
-  # For each node a separte service need to be added 
+  # Prometheus node-exporter 
+  # For each node a separte service needs to be added 
   ################################################################
-  # START NODE-EXPORTERS.....
   manager-001:
     image: prom/node-exporter
     volumes:
@@ -87,19 +79,14 @@ services:
 
     networks:
       - backend
-  ################################################################
-  # END NODE-EXPORTERS.....
-  ################################################################
-      
-      
-
 
 
   ################################################################
   # cAdvisor
-  #   - runs on every node
+  #   - it's a running daemon that collects, aggregates, processes, and exports information about each running container
+  #   - gathers separate info on each container
+  #   - https://github.com/google/cadvisor   
   ################################################################
-  # START CADVISORS.....
   docker-manager-001:
     image: google/cadvisor:latest
     volumes:
@@ -130,19 +117,10 @@ services:
     networks:
       - backend
 
-  ################################################################
-  # END CADVISORS.....
-  ################################################################
-
-
-
-
-
-
      
   ################################################################
   # Grafana
-  #  - runs on manager node (not anymore)
+  #  - runs on manager node
   ################################################################
   grafana:
     image: grafana/grafana
@@ -166,7 +144,10 @@ services:
       - frontend
       - backend
 
-
-
+networks:
+  frontend:
+    driver: overlay 
+  backend: 
+  
 volumes:
   grafana-data:
