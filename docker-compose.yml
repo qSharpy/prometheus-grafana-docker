@@ -123,7 +123,10 @@ services:
   #  - runs on manager node
   ################################################################
   grafana:
-    image: grafana/grafana
+    image: grafana/grafana:7.1.5
+    build: 
+      context: ./grafana
+      dockerfile: Dockerfile
     #environment:
     #  GF_SMTP_ENABLED: "true"
     #  GF_SMTP_HOST: "mailgateway:25"
