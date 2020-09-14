@@ -2,8 +2,7 @@ version: '3.2'
 
 networks:
   frontend:
-    external:
-      name: imixs-proxy-net 
+    driver: overlay 
   backend: 
   
 
