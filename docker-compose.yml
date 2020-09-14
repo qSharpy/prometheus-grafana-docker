@@ -8,7 +8,18 @@ networks:
 
 services:
 
-  ################################################################
+  visualizer:
+    image: bogdanbujor/visualizer:1.0
+    ports:
+      - "8080:8080"
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+ 
+ ################################################################
   # Prometheus 
   #  - runs on manager node
   ################################################################
