@@ -95,10 +95,9 @@ services:
     - /sys:/sys:ro
     - /var/lib/docker/:/var/lib/docker:ro
     deploy:
-      placement:
-        constraints:
-         # Hostname of the first manager node!
-          - node.hostname == node1
+       replicas: 1
+       restart_policy:
+         condition: on-failure
     networks:
       - backend
 
