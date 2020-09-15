@@ -123,7 +123,7 @@ services:
   #  - runs on manager node
   ################################################################
   grafana:
-    image: grafana/grafana
+    image: bogdanbujor/grafana:7.1.0-dashboard-provisioned-1.0
     #environment:
     #  GF_SMTP_ENABLED: "true"
     #  GF_SMTP_HOST: "mailgateway:25"
